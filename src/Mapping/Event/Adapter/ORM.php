@@ -119,6 +119,14 @@ class ORM implements AdapterInterface
     /**
      * {@inheritdoc}
      */
+    public function getIdentifierFieldNames($meta)
+    {
+        return $meta->getIdentifierFieldNames();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function recomputeSingleObjectChangeSet($uow, $meta, $object)
     {
         $uow->recomputeSingleEntityChangeSet($meta, $object);

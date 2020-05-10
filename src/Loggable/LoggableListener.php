@@ -282,6 +282,7 @@ class LoggableListener extends MappedEventSubscriber
             } else {
                 $logEntry->setObjectId($wrapped->getIdentifier());
             }
+
             $newValues = [];
             if (self::ACTION_REMOVE !== $action && isset($config['versioned'])) {
                 $newValues = $this->getObjectChangeSetData($ea, $object, $logEntry);
