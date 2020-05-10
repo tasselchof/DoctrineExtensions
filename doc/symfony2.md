@@ -83,7 +83,7 @@ doctrine:
                 alias: Gedmo
                 prefix: Gedmo\Translatable\Entity
                 # make sure vendor library location is correct
-                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
 ```
 
 After that, running **php app/console doctrine:mapping:info** you should see the output:
@@ -108,7 +108,7 @@ mappings:
         alias: Gedmo
         prefix: Gedmo\Translatable\Entity
         # make sure vendor library location is correct
-        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity/MappedSuperclass"
+        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Entity/MappedSuperclass"
 ```
 
 The configuration above, adds a **/MappedSuperclass** into directory depth, after running
@@ -135,17 +135,17 @@ orm:
             alias: Gedmo
             prefix: Gedmo\Translatable\Entity
             # make sure vendor library location is correct
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
         loggable:
             type: annotation
             alias: Gedmo
             prefix: Gedmo\Loggable\Entity
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Loggable/Entity"
         tree:
             type: annotation
             alias: Gedmo
             prefix: Gedmo\Tree\Entity
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Tree/Entity"
 ```
 
 <a name="ext-listeners"></a>
@@ -164,7 +164,7 @@ services:
     extension.listener:
         class: Acme\DemoBundle\Listener\DoctrineExtensionListener
         calls:
-            - [ setContainer, [ @service_container ] ]
+            - [ setContainer, [ "@service_container" ] ]
         tags:
             # translatable sets locale after router processing
             - { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
@@ -479,7 +479,7 @@ doctrine_mongodb:
                     alias: GedmoDocument
                     prefix: Gedmo\Translatable\Document
                     # make sure vendor library location is correct
-                    dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Document"
+                    dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/src/Translatable/Document"
 ```
 
 This also shows, how to make mappings based on single manager. All what differs is that **Document**

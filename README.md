@@ -1,72 +1,84 @@
-# Doctrine2 behavioral extensions
+# Doctrine Behavioral Extensions
 
-[![Build Status](https://secure.travis-ci.org/Atlantic18/DoctrineExtensions.png)](http://travis-ci.org/Atlantic18/DoctrineExtensions)
+[![Build Status](https://travis-ci.org/Atlantic18/DoctrineExtensions.svg?branch=master)](https://travis-ci.org/Atlantic18/DoctrineExtensions)
 [![Latest Stable Version](https://poser.pugx.org/gedmo/doctrine-extensions/version)](https://packagist.org/packages/gedmo/doctrine-extensions)
 
-**Note:** extensions might not evolve more after **2.4.x** it will remain stable and backward compatible. Unless
-new interested maintainers will take over the development and continue with **3.x** versions onward.
+This package contains extensions for Doctrine ORM and MongoDB ODM that offer new functionality or tools to use Doctrine
+more efficiently. These behaviors can be easily attached to the event system of Doctrine and handle the records being
+flushed in a behavioral way.
 
-**Note:** Extensions **2.4.x** are compatible with ORM and doctrine common library versions from **2.2.x** to **2.5.x**.
-ORM 2.5.x versions require **PHP 5.4** or higher.
+---
 
-**Note:** Extensions **2.3.x** are compatible with ORM and doctrine common library versions from **2.2.x** to **2.4.x**
-**Note:** If you are setting up entity manager without a framework, see the [example](/example/em.php) to prevent issues like #1310
+##### :warning: The `master` branch is for development on Doctrine Extensions 3.0.
 
-### Latest updates
+3.0 will focus on refreshing this package for today's PHP. This includes:
 
-**2016-01-27**
+- Bumping minimum version requirements of PHP, Doctrine, and other dependencies
+- Updating the test suite, add code and style standards, and other needed build tools
+- Cleaning up documentation, code, comments, etc.
 
-- Nested tree now allows root field as association.
+While major code changes are not expected initially for 3.0, it will be a major release due to changes in
+requirements and toolsets. [Read the Upgrade Doc for more info.](/doc/upgrading/upgrade-v2.4-to-v3.0.md)
 
-**2015-05-01**
+For the current stable version, see the [v2.4.x branch](https://github.com/Atlantic18/DoctrineExtensions/tree/v2.4.x).
 
-- Reverted back [1272](https://github.com/Atlantic18/DoctrineExtensions/pull/1272) and see [1263](https://github.com/Atlantic18/DoctrineExtensions/issues/1263). Use [naming strategy](http://stackoverflow.com/questions/12702657/how-to-configure-naming-strategy-in-doctrine-2) for your use cases.
-- Fixed bug for sortable [1279](https://github.com/Atlantic18/DoctrineExtensions/pull/1279)
+---
 
-**2015-03-26**
+## Installation
 
-Support for ORM and Common library **2.5.0**. A minor version bump, because of trait column changes.
+    $ composer require gedmo/doctrine-extensions
 
-**2015-01-28**
+* [Symfony 2](/doc/symfony2.md)
+* [Symfony 4](/doc/symfony4.md)
+* [Laravel 5](https://www.laraveldoctrine.org/docs/1.3/extensions)
+* [Zend Framework 2](/doc/zendframework2.md)
 
-Fixed the issue for all mappings, which caused related class mapping failures, when a relation or class name
-was in the same namespace, but extensions required it to be mapped as full classname.
+### Upgrading
 
-**2015-01-21**
+* [From v2.4.x to v3.0](/doc/upgrading/upgrade-v2.4-to-v3.0.md)
 
-Fixed memory leak issue with entity or document wrappers for convenient metadata retrieval.
+## Extensions
 
-### Summary and features
+#### ORM & MongoDB ODM
 
-This package contains extensions for Doctrine2 that hook into the facilities of Doctrine and
-offer new functionality or tools to use Doctrine2 more efficiently. This package contains mostly
-used behaviors which can be easily attached to your event system of Doctrine2 and handle the
-records being flushed in the behavioral way. List of extensions:
-
-- [**Tree**](/doc/tree.md) - this extension automates the tree handling process and adds some tree specific functions on repository.
-(**closure**, **nestedset** or **materialized path**)
-- [**Translatable**](/doc/translatable.md) - gives you a very handy solution for translating records into different languages. Easy to setup, easier to use.
-- [**Sluggable**](/doc/sluggable.md) - urlizes your specified fields into single unique slug
-- [**Timestampable**](/doc/timestampable.md) - updates date fields on create, update and even property change.
 - [**Blameable**](/doc/blameable.md) - updates string or reference fields on create, update and even property change with a string or object (e.g. user).
 - [**Loggable**](/doc/loggable.md) - helps tracking changes and history of objects, also supports version management.
-- [**Sortable**](/doc/sortable.md) - makes any document or entity sortable
-- [**Translator**](/doc/translatable.md) - explicit way to handle translations
+- [**Sluggable**](/doc/sluggable.md) - urlizes your specified fields into single unique slug
+- [**Timestampable**](/doc/timestampable.md) - updates date fields on create, update and even property change.
+- [**Translatable**](/doc/translatable.md) - gives you a very handy solution for translating records into different languages. Easy to setup, easier to use.
+- [**Tree**](/doc/tree.md) - automates the tree handling process and adds some tree-specific functions on repository.
+(**closure**, **nested set** or **materialized path**)
+  _(MongoDB ODM only supports materialized path)_
+
+#### ORM Only
+
+- [**IpTraceable**](/doc/ip_traceable.md) - inherited from Timestampable, sets IP address instead of timestamp
 - [**SoftDeleteable**](/doc/softdeleteable.md) - allows to implicitly remove records
+- [**Sortable**](/doc/sortable.md) - makes any document or entity sortable
 - [**Uploadable**](/doc/uploadable.md) - provides file upload handling in entity fields
+
+#### MongoDB ODM Only
+
 - [**References**](/doc/references.md) - supports linking Entities in Documents and vice versa
 - [**ReferenceIntegrity**](/doc/reference_integrity.md) - constrains ODM MongoDB Document references
-- [**IpTraceable**](/doc/ip_traceable.md) - inherited from Timestampable, sets IP address instead of timestamp
 
-Currently these extensions support **Yaml**, **Annotation**  and **Xml** mapping. Additional mapping drivers
+All extensions support **YAML**, **Annotation** and **XML** mapping. Additional mapping drivers
 can be easily implemented using Mapping extension to handle the additional metadata mapping.
 
-**Note:** Please note, that xml mapping needs to be in a different namespace, the declared namespace for
+### Version Compatibility
+
+| Extensions Version | Compatible Doctrine ORM & Common Library |
+| --- | --- |
+| 2.4 | 2.5+ |
+| 2.3 | 2.2 - 2.4 |
+
+If you are setting up the Entity Manager without a framework, see the [the example](/example/em.php) to prevent issues like #1310
+
+### XML Mapping
+
+XML mapping needs to be in a different namespace, the declared namespace for
 Doctrine extensions is http://gediminasm.org/schemas/orm/doctrine-extensions-mapping
 So root node now looks like this:
-
-**Note:** Use 2.1.x tag in order to use extensions based on Doctrine2.1.x versions. Currently
-master branch is based on 2.2.x versions and may not work with 2.1.x
 
 ```xml
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
@@ -81,37 +93,18 @@ XML mapping xsd schemas are also versioned and can be used by version suffix:
 - 2.2.x version - **http://gediminasm.org/schemas/orm/doctrine-extensions-mapping-2-2**
 - 2.1.x version - **http://gediminasm.org/schemas/orm/doctrine-extensions-mapping-2-1**
 
-### ODM MongoDB support
+### Running Tests
 
-List of extensions which support ODM
+To set up and run the tests, follow these steps:
 
-- Translatable
-- Sluggable
-- Timestampable
-- Blameable
-- Loggable
-- Translator
-- Tree (Materialized Path strategy for now)
-- References
-- ReferenceIntegrity
+- Install [Lando](https://docs.devwithlando.io/), a Docker-based dev environment tool
+- Run `lando start` from the project root
+- Make sure you `composer install` project dependencies
+- Run `lando php bin/phpunit -c tests`
 
-All these extensions can be nested together and mapped in traditional ways - **annotations**,
-**xml** or **yaml**
+### Running the Example
 
-### Running the tests:
-
-**pdo-sqlite** extension is necessary.
-To setup and run tests follow these steps:
-
-- go to the root directory of extensions
-- download composer: `wget https://getcomposer.org/composer.phar`
-- install dev libraries: `php composer.phar install`
-- run: `bin/phpunit -c tests`
-- optional - run mongodb service if targeting mongo tests
-
-### Running the example:
-
-To setup and run example follow these steps:
+To set up and run example, follow these steps:
 
 - go to the root directory of extensions
 - download composer: `wget https://getcomposer.org/composer.phar`
@@ -121,10 +114,10 @@ To setup and run example follow these steps:
 - run: `./example/bin/console orm:schema-tool:create` to create schema
 - run: `php example/run.php` to run example
 
-### Contributors:
+### Contributors
 
 Thanks to [everyone participating](http://github.com/l3pp4rd/DoctrineExtensions/contributors) in
-the development of these great Doctrine2 extensions!
+the development of these great Doctrine extensions!
 
 And especially ones who create and maintain new extensions:
 
@@ -133,4 +126,3 @@ And especially ones who create and maintain new extensions:
 - Boussekeyt Jules [gordonslondon](http://github.com/gordonslondon)
 - Kudryashov Konstantin [everzet](http://github.com/everzet)
 - David Buchmann [dbu](https://github.com/dbu)
-
