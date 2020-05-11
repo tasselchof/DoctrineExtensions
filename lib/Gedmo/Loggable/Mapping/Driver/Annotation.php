@@ -90,7 +90,7 @@ class Annotation extends AbstractAnnotationDriver
 
         if (!$meta->isMappedSuperclass && $config) {
             if (is_array($meta->identifier) && count($meta->identifier) > 1) {
-                throw new InvalidMappingException("Loggable does not support composite identifiers in class - {$meta->name}");
+//                throw new InvalidMappingException("Loggable does not support composite identifiers in class - {$meta->name}");
             }
             if ($this->isClassAnnotationInValid($meta, $config)) {
                 throw new InvalidMappingException("Class must be annotated with Loggable annotation in order to track versioned fields in class - {$meta->name}");
