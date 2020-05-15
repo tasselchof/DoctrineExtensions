@@ -23,28 +23,28 @@ abstract class AbstractLogEntry
     /**
      * @var string $action
      *
-     * @ORM\Column(length=8)
+     * @ORM\Column(type="string", length=8)
      */
     protected $action;
 
     /**
-     * @var string $loggedAt
+     * @var \DateTime $loggedAt
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="logged_at", type="datetime")
      */
     protected $loggedAt;
 
     /**
      * @var string $objectId
      *
-     * @ORM\Column(length=64, nullable=true)
+     * @ORM\Column(name="object_id", length=64, nullable=true)
      */
     protected $objectId;
 
     /**
      * @var string $objectClass
      *
-     * @ORM\Column(length=255)
+     * @ORM\Column(name="object_class", type="string", length=255)
      */
     protected $objectClass;
 
@@ -56,7 +56,7 @@ abstract class AbstractLogEntry
     protected $version;
 
     /**
-     * @var string $data
+     * @var array $data
      *
      * @ORM\Column(type="array", nullable=true)
      */
