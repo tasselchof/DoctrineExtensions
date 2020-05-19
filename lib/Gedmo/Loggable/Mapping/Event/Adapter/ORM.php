@@ -37,7 +37,6 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     {
         $em = $this->getObjectManager();
         $objectMeta = $em->getClassMetadata(get_class($object));
-        $identifierField = $this->getSingleIdentifierFieldName($objectMeta);
 
         if (!$objectMeta->isIdentifierComposite) {
             $identifierField = $this->getSingleIdentifierFieldName($objectMeta);
